@@ -55,3 +55,7 @@ build-iPhoneSimulator/
 
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
+
+# allow each chapter to maintain their own emails for mentee/mentor emails
+data/email/*/body.md
+data/email/*/subject.md

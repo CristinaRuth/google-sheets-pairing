@@ -28,6 +28,16 @@ Copy the file into into the root of the repo and rename to `client_secret.json` 
   - Choose 'OAuth client ID' and give your client a name
   - Download the client credentials file for the OAuth client ID you just created (there's an icon for download on the right)
 
+To send pairing emails, you'll need to maintain your own copy of the markdown files under `/data/email`. Samples have been provided to give you an idea of sample pairing emails to mentors and mentees.
+1. Under `/data/email/mentee/`
+  - Copy and paste the `body_sample.md` in the same directory. Rename the new file `body.md`.
+  - Copy and paste the `subject_sample.md` in the same directory. Rename the new file `subject.md`.
+2. Under `/data/email/mentor/`
+  - Copy and paste the `body_sample.md` in the same directory. Rename the new file `body.md`.
+  - Copy and paste the `subject_sample.md` in the same directory. Rename the new file `subject.md`.
+
+The new files above will determine your email contents to mentors and mentees. Update them as you wish, but they are git-ignored, so they will not be checked into the repository. This is to allow each chapter to be able to maintain their own copy of the emails.
+
 ## Usage
 
 ### Running the matcher
@@ -57,7 +67,20 @@ You can also pass the argument in rather than wait for input
 ruby mailer.rb SPREADSHEET_ID
 ```
 
-`mailer.rb` expects 2 sheets in your Google Spreadsheet titled 'Mentor Email' and 'Mentee Email'. In each sheet, the content of cell A1 will be used as the email subject, and the content of A2 will be used as the email body. The body (cell A2) can be written in markdown which will be parsed and converted to HTML. This way you can add formatting to your email body. 
+`mailer.rb` expects 1 sheet in your Google Spreadsheet titled 'Event Details'.
+
+The contents are parsed as follows:
+* Cell A1 - Event Day (e.g. Tue)
+* Cell A2 - Event Date (e.g. Nov 13)
+* Cell A3 - Event Start Time (e.g. 6:00 PM)
+* Cell A4 - City Name (e.g. Chicago)
+* Cell A5 - Event Sponsor Name (e.g. Some Company Name)
+* Cell A6 - Event Sponsor Address (e.g. 123 Main St, Chicago, IL)
+* Cell A7 - Food Info (e.g. Food will be provided at this event.)
+
+Mentor and Mentee email data are read locally from the folder `/data/email/mentor` or `/data/email/mentee`. Subject data is read from `subject.md` and body data is ready from `body.md`.
+
+The markdown contents will be parsed and converted to HTML.
 
 The following tokens in both the subject and body will be string replaced with the data from the 'Pairing' sheet.
 - `[MENTOR_NAME]`
@@ -66,6 +89,15 @@ The following tokens in both the subject and body will be string replaced with t
 - `[MENTEE_EMAIL]`
 - `[MENTEE_CODE]`
 - `[MENTEE_FEEDBACK]`
+
+Additionally, the following tokens in both the subject and body will be string replaced with the data from the 'Event Details' sheet.
+- `[EVENT_DAY]`
+- `[EVENT_DATE]`
+- `[EVENT_START_TIME]`
+- `[EVENT_CITY_NAME]`
+- `[SPONSOR_NAME]`
+- `[SPONSOR_ADDRESS]`
+- `[FOOD_INFO]`
 
 You do not need to include all of these in your email, but they are available for you.
 

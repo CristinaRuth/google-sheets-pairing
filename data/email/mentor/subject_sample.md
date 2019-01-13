@@ -1,0 +1,1 @@
+[EVENT_DATE] Code Review & Pairing - [EVENT_CITY_NAME] - Match Notification
