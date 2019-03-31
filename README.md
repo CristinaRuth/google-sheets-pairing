@@ -101,6 +101,37 @@ Additionally, the following tokens in both the subject and body will be string r
 
 You do not need to include all of these in your email, but they are available for you.
 
+### Running the General Mailer
+
+The general mailer generates drafts of emails based on a template and saves the email subject and body templates to the `Email` sheet. These emails are not necessarily bound to a pairing session, which `mailer.rb` is used for. `mailer.rb` expects a spreadsheet of pairing data but `mailer-general.rb` expects general name and email data in the spreadsheet.
+
+```
+ruby mailer-general.rb
+```
+You will be prompted for a Spreadsheet Id. This can be found in the url of your Google Sheets.
+
+https://docs.google.com/spreadsheets/d/**the_id_is_found_here_and_is_rather_long**/edit#gid=0
+
+You can also pass the argument in rather than wait for input 
+```
+ruby mailer-general.rb SPREADSHEET_ID
+```
+
+`mailer-general.rb` expects 1 sheet in your Google Spreadsheet titled 'Contacts'.
+
+The contents are parsed as follows:
+* Column A - Name
+* Column B - Email
+
+Email data is read locally from the folder `/data/email/general`. Subject data is read from `subject.md` and body data is ready from `body.md`.
+
+The markdown contents will be parsed and converted to HTML.
+
+The following tokens in both the subject and body will be string replaced with the data from the 'Contacts' sheet.
+- `[NAME]`
+
+You do not need to include all of these in your email, but they are available for you.
+
 #### First time running
 The first time you run the CLI, you'll be presented with a link to follow that will grant the app the correct security access. Follow the link and then copy/paste the generated token into the command line. This will create and save your token file (`google_sheets_token.yaml` or `gmail_token.yaml`).
 
