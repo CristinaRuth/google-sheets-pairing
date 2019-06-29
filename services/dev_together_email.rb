@@ -42,14 +42,24 @@ class DevTogetherEmail
       next if pairing_row.length < EXPECTED_ROW_LENGTH
 
       #send mentor email
-      mentor_email = pairing_row[3]
-      create_draft(pairing_row, mentor_email, mentor_subject, mentor_body_format_string)
+      is_mentor_email_sent = pairing_row[0].strip.downcase # determines if email has been sent to mentor. expect an empty or "n" value
+      mentor_email = pairing_row[3] #column 4 is mentor email
+      if is_mentor_email_sent == "n" || is_mentor_email_sent == ""
+        create_draft(pairing_row, mentor_email, mentor_subject, mentor_body_format_string)
+      else 
+        puts "Detected email has been sent to #{mentor_email}. Skipping."
+      end
       
       #send mentee email
-      mentee_email = pairing_row[5]
-      create_draft(pairing_row, mentee_email, mentee_subject, mentee_body_format_string)
+      is_mentee_email_sent = pairing_row[1].strip.downcase # determines if email has been sent to mentee. expect an empty or "n" value
+      mentee_email = pairing_row[5] #column 5 is mentee email
+      if is_mentee_email_sent == "n" || is_mentee_email_sent == ""
+        create_draft(pairing_row, mentee_email, mentee_subject, mentee_body_format_string)
+      else 
+        puts "Detected email has been sent to #{mentee_email}. Skipping."
+      end
     end
-   
+
      #store mentor email into spreadsheet for future reference
      create_email_sheet("Mentor", MENTOR_EMAIL_SHEET_NAME, mentor_subject, mentor_body_format_string)
 
