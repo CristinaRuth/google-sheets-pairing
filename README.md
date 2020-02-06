@@ -2,11 +2,16 @@
 
 A simple ruby CLI app for maximally matching data from Google sheets and creating draft emails.
 
+## Matcher.rb
 The matcher (`matcher.rb`) is currently set up and configured to read Dev Together event registrations from our Google Form submissions and match Mentors and Mentees based on the languages and frameworks they have in common.
 
 The code uses an iteration on the Edmonds matrix in order to calculate a maximum bipartite matching of the 2 data sets.
 
-The mailer (`mailer.rb`) reads the the data written from the matcher and creates draft emails for you to send attendees. More info below.
+## Mailer.rb
+The mailer (`mailer.rb`) reads the the data written from the matcher and creates draft emails for you to send to paired Mentors and Mentees. More info below.
+
+## Mailer-general.rb
+The general mailer (`mailer-general.rb`) generates drafts of generic (non-pairing) emails.
 
 ## Getting Started
 
