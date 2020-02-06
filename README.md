@@ -11,7 +11,7 @@ The code uses an iteration on the Edmonds matrix in order to calculate a maximum
 The mailer (`mailer.rb`) reads the the data written from the matcher and creates draft emails for you to send to paired Mentors and Mentees. More info below.
 
 ## Mailer-general.rb
-The general mailer (`mailer-general.rb`) generates drafts of generic (non-pairing) emails.
+The general mailer (`mailer-general.rb`) generates drafts of generic (non-pairing) emails. More info below.
 
 ## Getting Started
 
